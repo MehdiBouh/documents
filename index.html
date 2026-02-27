@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Moulins avec vous — Bilan du mandat (PDF)</title>
-  <meta name="description" content="Téléchargez le bilan du mandat précédent au format PDF - Moulins avec vous." />
+  <title>Moulins avec vous - Bilan du mandat (PDF)</title>
+  <meta name="description" content="Accédez au bilan du mandat écoulé au format PDF — Moulins avec vous." />
 
   <style>
     :root{
@@ -107,10 +107,7 @@
       line-height:1.15;
     }
 
-    /* Plus d'espace sous le titre */
-    .title-spacer{
-      height:14px;
-    }
+    .title-spacer{height:14px}
 
     .intro{
       margin:0;
@@ -120,12 +117,19 @@
       max-width:62ch;
     }
 
-    /* Espace avant le bouton */
-    .btn-spacer{
-      height:18px;
+    .btn-spacer{height:18px}
+
+    /* Actions : 2 boutons côte à côte */
+    .actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      justify-content:center;
+      align-items:center;
+      width:100%;
     }
 
-    /* Bouton style “pill” (inspiré de ta capture) */
+    /* Bouton principal (Télécharger) */
     .btn-primary{
       display:inline-flex;
       align-items:center;
@@ -139,19 +143,17 @@
       font-weight:900;
       font-size:15px;
 
-      color:var(--white); /* texte blanc */
+      color:var(--white);
       background: linear-gradient(135deg, var(--turquoise), rgba(32,191,207,.86));
-
       border:1px solid rgba(35,31,32,.10);
 
-      /* Ombres (bouton + texte) */
       box-shadow:
         0 14px 30px rgba(35,31,32,.16),
         0 2px 0 rgba(255,255,255,.22) inset;
       text-shadow: 0 1px 1px rgba(0,0,0,.28);
 
       transition: transform .08s ease, box-shadow .12s ease, filter .12s ease;
-      min-width:min(320px, 92vw);
+      min-width:min(260px, 92vw);
     }
 
     .btn-primary:hover{
@@ -177,6 +179,37 @@
         0 2px 0 rgba(255,255,255,.22) inset;
     }
 
+    /* Bouton secondaire (Ouvrir) */
+    .btn-secondary{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:12px 18px;
+      border-radius:999px;
+
+      text-decoration:none;
+      font-weight:900;
+      font-size:15px;
+
+      color:var(--black);
+      background: rgba(255,255,255,1);
+      border:1px solid rgba(35,31,32,.16);
+
+      box-shadow: 0 10px 22px rgba(35,31,32,.10);
+      transition: transform .08s ease, box-shadow .12s ease, filter .12s ease;
+      min-width:140px;
+    }
+
+    .btn-secondary:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 14px 28px rgba(35,31,32,.12);
+      filter: brightness(1.01);
+    }
+    .btn-secondary:focus{
+      outline:none;
+      box-shadow: var(--focus), 0 10px 22px rgba(35,31,32,.10);
+    }
+
     .fineprint{
       margin:18px 0 0;
       font-size:13px;
@@ -184,19 +217,6 @@
       text-align:center;
     }
     .fineprint a{ color:rgba(35,31,32,.88); }
-
-    footer{
-      width:100%;
-      text-align:center;
-      color:rgba(35,31,32,.70);
-      font-size:13px;
-      display:flex;
-      flex-direction:column;
-      gap:6px;
-      align-items:center;
-      padding:0 6px;
-    }
-    footer a{ color:rgba(35,31,32,.88); }
   </style>
 </head>
 
@@ -208,7 +228,7 @@
     </header>
 
     <main class="card" role="main">
-      <h1>Accédez au bilan du mandat écoulé</h1>
+      <h1>Le bilan du mandat, à consulter et à télécharger</h1>
 
       <div class="title-spacer" aria-hidden="true"></div>
 
@@ -221,17 +241,21 @@
 
       <div class="btn-spacer" aria-hidden="true"></div>
 
-      <!-- IMPORTANT : nom EXACT du fichier PDF -->
-      <a class="btn-primary" href="Bilan.pdf" download>Télécharger (PDF)</a>
+      <div class="actions">
+        <!-- IMPORTANT : nom EXACT du fichier PDF -->
+        <a class="btn-primary" href="Bilan.pdf" download>Télécharger (PDF)</a>
+        <a class="btn-secondary" href="Bilan.pdf" target="_blank" rel="noopener">Ouvrir</a>
+      </div>
 
       <p class="fineprint">
         Contact : <a href="mailto:contact@moulinsavecvous.fr">contact@moulinsavecvous.fr</a>
+        • aucun suivi • aucun cookie
       </p>
     </main>
 
-    <footer>
-      <div>© Moulins avec vous</div>
-      <div><a href="mailto:contact@moulinsavecvous.fr">Nous contacter</a></div>
+    <!-- Footer sans "Nous contacter" (doublon) -->
+    <footer style="text-align:center;color:rgba(35,31,32,.70);font-size:13px;">
+      © Moulins avec vous
     </footer>
 
   </div>
