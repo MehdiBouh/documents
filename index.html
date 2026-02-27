@@ -3,18 +3,314 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Télécharger le document</title>
+  <title>Moulins avec vous — Documents</title>
+  <meta name="description" content="Téléchargez les documents PDF de la liste Moulins avec vous (bilan, programme, etc.)." />
+
+  <!-- Open Graph (utile pour Facebook) -->
+  <meta property="og:title" content="Moulins avec vous — Documents à télécharger" />
+  <meta property="og:description" content="Accédez aux documents PDF (bilan, programme…). Téléchargement direct." />
+  <meta property="og:type" content="website" />
+  <!-- Optionnel : ajoute un visuel de partage plus tard (cover.jpg) -->
+  <!-- <meta property="og:image" content="https://pdf.tondomaine.fr/cover.jpg" /> -->
+
   <style>
-    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;display:grid;place-items:center;min-height:100vh;margin:0}
-    .card{max-width:640px;padding:24px 22px;border:1px solid #e6e6e6;border-radius:16px}
-    a{display:inline-block;margin-top:12px;padding:12px 16px;border-radius:12px;text-decoration:none;border:1px solid #111}
+    :root{
+      --turq:#4EFFCB;
+      --green:#A6FF03;
+      --script:#5C5C5C;
+      --black:#020202;
+      --white:#FFFFFF;
+      --blue:#0077B6;
+
+      --bg:#F6F8FB;
+      --border:rgba(2,2,2,.10);
+      --shadow: 0 14px 40px rgba(2,2,2,.12);
+      --radius:22px;
+    }
+
+    /* Si tu as les fichiers de polices en local plus tard :
+       - ajoute les .woff2 dans le repo (ex: /fonts/)
+       - et décommente les @font-face ci-dessous.
+
+    @font-face{
+      font-family:"Peugeot Bold";
+      src:url("fonts/peugeot-bold.woff2") format("woff2");
+      font-weight:700; font-style:normal; font-display:swap;
+    }
+    @font-face{
+      font-family:"Peugeot Light";
+      src:url("fonts/peugeot-light.woff2") format("woff2");
+      font-weight:300; font-style:normal; font-display:swap;
+    }
+    @font-face{
+      font-family:"SignPainter HouseScript";
+      src:url("fonts/signpainter.woff2") format("woff2");
+      font-weight:400; font-style:normal; font-display:swap;
+    }
+    */
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      color:var(--black);
+      background:
+        radial-gradient(900px 500px at 15% 10%, rgba(78,255,203,.25), transparent 60%),
+        radial-gradient(900px 500px at 85% 0%, rgba(0,119,182,.18), transparent 60%),
+        var(--bg);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+
+    .wrap{
+      max-width:980px;
+      margin:0 auto;
+      padding:22px 16px 40px;
+    }
+
+    /* Header bandeau */
+    .brandbar{
+      background:linear-gradient(135deg, rgba(0,119,182,1), rgba(0,119,182,.92));
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:28px;
+      padding:18px 18px;
+      box-shadow: var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+    .brandbar:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(500px 220px at 20% 20%, rgba(78,255,203,.55), transparent 60%),
+        radial-gradient(420px 220px at 80% 10%, rgba(166,255,3,.25), transparent 60%);
+      opacity:.55;
+      pointer-events:none;
+    }
+    .brand{
+      position:relative;
+      display:flex;
+      align-items:flex-end;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .moulins{
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-weight:800;
+      color:var(--white);
+      font-size: clamp(22px, 3.4vw, 34px);
+      line-height:1;
+      /* font-family:"Peugeot Bold", system-ui, sans-serif; */
+    }
+    .avec{
+      color:var(--script);
+      background:rgba(255,255,255,.92);
+      padding:6px 12px 8px;
+      border-radius:999px;
+      font-size: clamp(18px, 3.2vw, 28px);
+      line-height:1;
+      box-shadow: 0 10px 30px rgba(2,2,2,.10);
+      position:relative;
+      /* font-family:"SignPainter HouseScript", "Brush Script MT", cursive; */
+    }
+    .avec:after{
+      content:"";
+      display:inline-block;
+      width:8px; height:8px;
+      border-radius:50%;
+      background:var(--green);
+      margin-left:8px;
+      transform:translateY(-8px);
+    }
+    .baseline{
+      position:relative;
+      margin-top:10px;
+      color:rgba(255,255,255,.92);
+      font-size:14px;
+      letter-spacing:.02em;
+      /* font-family:"Peugeot Light", system-ui, sans-serif; */
+    }
+
+    /* Card principale */
+    .card{
+      margin-top:18px;
+      background:rgba(255,255,255,.92);
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:18px;
+      backdrop-filter: blur(6px);
+    }
+    .card h1{
+      margin:0 0 6px;
+      font-size:22px;
+      letter-spacing:.01em;
+    }
+    .sub{
+      margin:0 0 16px;
+      color:rgba(2,2,2,.72);
+      font-size:15px;
+      line-height:1.45;
+    }
+
+    /* Liste documents */
+    .docs{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:12px;
+    }
+    @media (min-width: 740px){
+      .docs{ grid-template-columns: 1fr 1fr; }
+    }
+
+    .doc{
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:14px;
+      background:linear-gradient(180deg, rgba(255,255,255,1), rgba(255,255,255,.86));
+    }
+    .dochead{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+    }
+    .icon{
+      width:42px; height:42px;
+      border-radius:14px;
+      background:rgba(78,255,203,.25);
+      border:1px solid rgba(78,255,203,.45);
+      display:grid;
+      place-items:center;
+      flex:0 0 auto;
+    }
+    .doctitle{
+      margin:0;
+      font-size:16px;
+      font-weight:750;
+    }
+    .docmeta{
+      margin:4px 0 0;
+      color:rgba(2,2,2,.70);
+      font-size:13px;
+      line-height:1.45;
+    }
+
+    .actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 12px;
+      border-radius:14px;
+      text-decoration:none;
+      border:1px solid rgba(2,2,2,.14);
+      font-weight:700;
+      font-size:14px;
+      color:var(--black);
+      background:rgba(255,255,255,1);
+      transition:transform .08s ease, box-shadow .12s ease;
+    }
+    .btn:hover{ transform: translateY(-1px); box-shadow: 0 10px 26px rgba(2,2,2,.10); }
+
+    .btn-primary{
+      background:linear-gradient(135deg, var(--turq), rgba(78,255,203,.80));
+      border:1px solid rgba(2,2,2,.12);
+    }
+
+    footer{
+      margin-top:16px;
+      color:rgba(2,2,2,.70);
+      font-size:13px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      justify-content:space-between;
+      padding:0 4px;
+    }
+    footer a{ color:rgba(2,2,2,.85); }
   </style>
 </head>
+
 <body>
-  <main class="card">
-    <h1>Télécharger le document</h1>
-    <p>Clique ci-dessous pour télécharger le PDF.</p>
-    <a href="Bilan.pdf" download>Télécharger le Bilan</a>
-  </main>
+  <div class="wrap">
+
+    <header class="brandbar" role="banner">
+      <div class="brand">
+        <div class="moulins">MOULINS</div>
+        <div class="avec">avec vous</div>
+      </div>
+      <div class="baseline">Liste d’Union et d’Intérêt Communal</div>
+    </header>
+
+    <main class="card" role="main">
+      <h1>Documents à télécharger</h1>
+      <p class="sub">
+        Accédez en un clic aux documents PDF. Aucun compte, aucun suivi, aucun cookie.
+      </p>
+
+      <section class="docs" aria-label="Liste des documents">
+
+        <!-- 1) Exemple Bilan -->
+        <article class="doc">
+          <div class="dochead">
+            <div class="icon" aria-hidden="true">
+              <!-- petit pictogramme "PDF" en SVG -->
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <path d="M7 3h7l3 3v15a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z" stroke="rgba(2,2,2,.75)" stroke-width="1.6" />
+                <path d="M14 3v4h4" stroke="rgba(2,2,2,.75)" stroke-width="1.6" />
+                <path d="M7.5 15.5h9" stroke="rgba(2,2,2,.55)" stroke-width="1.6" />
+                <path d="M7.5 18.5h7" stroke="rgba(2,2,2,.55)" stroke-width="1.6" />
+              </svg>
+            </div>
+            <div>
+              <h2 class="doctitle">Bilan du mandat</h2>
+              <p class="docmeta">Document PDF — synthèse et éléments clés.</p>
+            </div>
+          </div>
+          <div class="actions">
+            <a class="btn btn-primary" href="Bilan.pdf" download>Télécharger (PDF)</a>
+            <a class="btn" href="Bilan.pdf" target="_blank" rel="noopener">Ouvrir</a>
+          </div>
+        </article>
+
+        <!-- 2) Exemple Programme (décommente quand tu ajoutes le fichier) -->
+        <!--
+        <article class="doc">
+          <div class="dochead">
+            <div class="icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <path d="M7 3h7l3 3v15a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z" stroke="rgba(2,2,2,.75)" stroke-width="1.6" />
+                <path d="M14 3v4h4" stroke="rgba(2,2,2,.75)" stroke-width="1.6" />
+                <path d="M7.5 15.5h9" stroke="rgba(2,2,2,.55)" stroke-width="1.6" />
+                <path d="M7.5 18.5h7" stroke="rgba(2,2,2,.55)" stroke-width="1.6" />
+              </svg>
+            </div>
+            <div>
+              <h2 class="doctitle">Programme</h2>
+              <p class="docmeta">Document PDF — nos propositions, quartier par quartier.</p>
+            </div>
+          </div>
+          <div class="actions">
+            <a class="btn btn-primary" href="Programme.pdf" download>Télécharger (PDF)</a>
+            <a class="btn" href="Programme.pdf" target="_blank" rel="noopener">Ouvrir</a>
+          </div>
+        </article>
+        -->
+
+      </section>
+    </main>
+
+    <footer>
+      <div>Contact : <a href="mailto:contact@moulinsavecvous.fr">contact@moulinsavecvous.fr</a></div>
+      <div>Aucun cookie • Aucun suivi</div>
+    </footer>
+
+  </div>
 </body>
 </html>
