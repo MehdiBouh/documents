@@ -8,7 +8,245 @@
 
   <!-- OpenGraph (Facebook) -->
   <meta property="og:title" content="Moulins avec vous — Bilan du mandat" />
-  <meta property="og:description" content="Téléchargez le bilan du mandat au format PDF. Document officiel — sans cookie." />
+  <meta property="og:description" content="Téléchargez le bilan du mandat au format PDF. Document officiel — sans cookie." /><!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Moulins avec vous — Bilan du mandat (PDF)</title>
+  <meta name="description" content="Téléchargez le bilan du mandat précédent au format PDF — Moulins avec vous." />
+
+  <style>
+    :root{
+      /* Identité */
+      --blue:#0074BC;
+      --turquoise:#20BFCF;
+      --green:#B2D234;
+      --green2:#CFEE52;
+      --grey:#77787B;
+      --black:#231F20;
+      --white:#FFFFFF;
+
+      /* UI */
+      --bg:#F4F7FB;
+      --border:rgba(35,31,32,.12);
+      --shadow:0 18px 52px rgba(35,31,32,.14);
+      --radius:22px;
+      --focus: 0 0 0 4px rgba(32,191,207,.25);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+
+    body{
+      margin:0;
+      color:var(--black);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(900px 520px at 50% 0%, rgba(32,191,207,.14), transparent 62%),
+        radial-gradient(900px 520px at 50% 25%, rgba(0,116,188,.10), transparent 62%),
+        var(--bg);
+    }
+
+    /* Wrap plus étroit + centré */
+    .wrap{
+      max-width:700px;
+      margin:0 auto;
+      padding:22px 16px 44px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:16px;
+    }
+
+    /* Bandeau bleu : logo uniquement */
+    .brandbar{
+      width:100%;
+      background: linear-gradient(135deg, var(--blue), rgba(0,116,188,.90));
+      border:1px solid rgba(255,255,255,.14);
+      border-radius:28px;
+      padding:18px 16px;
+      box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
+
+      display:flex;
+      justify-content:center;
+      align-items:center;
+    }
+    .brandbar:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(520px 240px at 20% 25%, rgba(32,191,207,.52), transparent 62%),
+        radial-gradient(420px 220px at 88% 12%, rgba(178,210,52,.28), transparent 60%);
+      opacity:.55;
+      pointer-events:none;
+    }
+
+    .logo{
+      position:relative;
+      height:76px;
+      width:auto;
+      max-width:min(340px, 82vw);
+      object-fit:contain;
+      filter: drop-shadow(0 10px 22px rgba(0,0,0,.22));
+    }
+
+    /* Bloc principal centré */
+    .card{
+      width:100%;
+      background:rgba(255,255,255,.94);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:26px 20px;
+      backdrop-filter: blur(6px);
+
+      text-align:center;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+    }
+
+    h1{
+      margin:0;
+      font-size: clamp(22px, 3.2vw, 30px);
+      letter-spacing:.01em;
+      font-weight:900;
+      line-height:1.15;
+    }
+
+    /* Plus d'espace sous le titre */
+    .title-spacer{
+      height:14px;
+    }
+
+    .intro{
+      margin:0;
+      color:rgba(35,31,32,.74);
+      font-size:15px;
+      line-height:1.65;
+      max-width:62ch;
+    }
+
+    /* Espace avant le bouton */
+    .btn-spacer{
+      height:18px;
+    }
+
+    /* Bouton style “pill” (inspiré de ta capture) */
+    .btn-primary{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+
+      padding:12px 18px;
+      border-radius:999px;
+
+      text-decoration:none;
+      font-weight:900;
+      font-size:15px;
+
+      color:var(--white); /* texte blanc */
+      background: linear-gradient(135deg, var(--turquoise), rgba(32,191,207,.86));
+
+      border:1px solid rgba(35,31,32,.10);
+
+      /* Ombres (bouton + texte) */
+      box-shadow:
+        0 14px 30px rgba(35,31,32,.16),
+        0 2px 0 rgba(255,255,255,.22) inset;
+      text-shadow: 0 1px 1px rgba(0,0,0,.28);
+
+      transition: transform .08s ease, box-shadow .12s ease, filter .12s ease;
+      min-width:min(320px, 92vw);
+    }
+
+    .btn-primary:hover{
+      transform: translateY(-1px);
+      filter: brightness(1.02);
+      box-shadow:
+        0 18px 40px rgba(35,31,32,.18),
+        0 2px 0 rgba(255,255,255,.22) inset;
+    }
+
+    .btn-primary:active{
+      transform: translateY(0px);
+      box-shadow:
+        0 10px 22px rgba(35,31,32,.16),
+        0 2px 0 rgba(255,255,255,.18) inset;
+    }
+
+    .btn-primary:focus{
+      outline:none;
+      box-shadow:
+        var(--focus),
+        0 14px 30px rgba(35,31,32,.16),
+        0 2px 0 rgba(255,255,255,.22) inset;
+    }
+
+    .fineprint{
+      margin:18px 0 0;
+      font-size:13px;
+      color:rgba(35,31,32,.70);
+      text-align:center;
+    }
+    .fineprint a{ color:rgba(35,31,32,.88); }
+
+    footer{
+      width:100%;
+      text-align:center;
+      color:rgba(35,31,32,.70);
+      font-size:13px;
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      align-items:center;
+      padding:0 6px;
+    }
+    footer a{ color:rgba(35,31,32,.88); }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <header class="brandbar" role="banner">
+      <img class="logo" src="logow.png" alt="Moulins avec vous" />
+    </header>
+
+    <main class="card" role="main">
+      <h1>Téléchargez le bilan de notre mandat précédent</h1>
+
+      <div class="title-spacer" aria-hidden="true"></div>
+
+      <p class="intro">
+        Afin de garantir une information claire et accessible, nous mettons à votre disposition le bilan du mandat écoulé.
+        Ce document présente, de manière synthétique et factuelle, les principales actions menées, les projets réalisés
+        et les engagements tenus. Il s’inscrit dans une démarche de transparence et de responsabilité vis-à-vis des
+        habitants de Moulins-lès-Metz.
+      </p>
+
+      <div class="btn-spacer" aria-hidden="true"></div>
+
+      <!-- IMPORTANT : nom EXACT du fichier PDF -->
+      <a class="btn-primary" href="Bilan.pdf" download>Télécharger (PDF)</a>
+
+      <p class="fineprint">
+        Contact : <a href="mailto:contact@moulinsavecvous.fr">contact@moulinsavecvous.fr</a>
+      </p>
+    </main>
+
+    <footer>
+      <div>© Moulins avec vous</div>
+      <div><a href="mailto:contact@moulinsavecvous.fr">Nous contacter</a></div>
+    </footer>
+
+  </div>
+</body>
+</html>
   <meta property="og:type" content="website" />
 
   <style>
@@ -282,7 +520,7 @@
 
     <header class="brandbar" role="banner">
       <div class="brand">
-        <img class="logo" src="logo.png" alt="Moulins avec vous" />
+        <img class="logo" src="logow.png" alt="Moulins avec vous" />
         <div class="brandtext">
           <div class="titleline">
             <div class="moulins">MOULINS</div>
